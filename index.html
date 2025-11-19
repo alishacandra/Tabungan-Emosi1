@@ -1,0 +1,94 @@
+<!-- index.html -->
+<div class="face">😊</div>
+</div>
+<div class="progress-info">
+<div class="amount" id="total">Saldo: 0</div>
+<div class="goal">Target: 100</div>
+</div>
+</section>
+
+
+<section class="form-section">
+<form id="emotionForm">
+<label for="emotion">Emosi</label>
+<select id="emotion">
+<option>Bahagia</option>
+<option>Tenang</option>
+<option>Biasa Saja</option>
+<option>Capek</option>
+<option>Stress</option>
+</select>
+
+
+<label for="value">Nilai (1–25)</label>
+<input id="value" type="number" min="1" max="25" value="5" />
+
+
+<button type="submit" class="btn">Masukkan ke Tabungan</button>
+</form>
+
+
+<ul id="entries" class="entries">
+<!-- daftar entri muncul di sini -->
+</ul>
+</section>
+</main>
+
+
+<footer class="site-footer">
+<small>Tip: Catat hal kecil yang membuatmu lega. Ulangi — itu menabung emosi.</small>
+</footer>
+
+
+<script>
+const form = document.getElementById('emotionForm');
+const entries = document.getElementById('entries');
+const totalEl = document.getElementById('total');
+const liquid = document.getElementById('liquid');
+
+
+let total = 0;
+const GOAL = 100;
+
+
+function updateUI() {
+totalEl.textContent = `Saldo: ${total}`;
+const pct = Math.min(100, Math.round((total / GOAL) * 100));
+liquid.style.height = pct + '%';
+}
+
+
+form.addEventListener('submit', e => {
+e.preventDefault();
+const emotion = document.getElementById('emotion').value;
+const value = parseInt(document.getElementById('value').value, 10) || 0;
+if (value <= 0) return;
+
+
+total += value;
+
+
+const li = document.createElement('li');
+li.className = 'entry';
+li.innerHTML = `<strong>${emotion}</strong> — +${value}`;
+entries.prepend(li);
+
+
+updateUI();
+form.reset();
+document.getElementById('value').value = 5;
+});
+
+
+// small playful animation: floating face
+setInterval(() => {
+const face = document.querySelector('.jar .face');
+face.style.transform = `translateY(${Math.sin(Date.now()/600)*6}px)`;
+}, 50);
+
+
+// initialize
+updateUI();
+</script>
+</body>
+</html>
