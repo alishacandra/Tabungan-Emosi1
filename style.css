@@ -1,0 +1,125 @@
+/* styles.css — tema warna tenang, soft pastel */
+
+:root {
+  --bg: #fef7fb;
+  --card: #ffffff;
+  --accent: #ff9ac7;      /* pink pastel utama */
+  --accent-soft: #ffe0ef; /* pink muda lembut */
+  --text: #4a3d45;
+  --text-soft: #7b6a73;
+  --border: #f4d6e4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  padding: 30px;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+input, select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--accent-soft);
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent);
+  background: #fff;
+}
+
+button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+/* Jar */
+.jar {
+  width: 150px;
+  height: 220px;
+  background: var(--accent-soft);
+  border: 3px solid var(--accent);
+  border-radius: 70px 70px 30px 30px;
+  margin: 0 auto 25px auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#liquid {
+  width: 100%;
+  background: var(--accent);
+  height: 0%;
+  transition: height 0.4s ease;
+}
+
+.face {
+  position: absolute;
+  bottom: 25px;
+  font-size: 28px;
+}
+
+/* Riwayat */
+#entries {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.entry {
+  background: var(--accent-soft);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+}
