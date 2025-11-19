@@ -1,100 +1,40 @@
 <!-- index.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tabungan Emosi</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tabungan Emosi</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>Tabungan Emosi</h1>
-    <p class="tagline">Kumpulkan momen—jaga hatimu, sedikit demi sedikit.</p>
-  </header>
+<div class="container">
+<h1>Tabungan Emosi</h1>
 
-  <main class="container">
-    <section class="jar-section">
-      <div class="jar">
-        <div class="liquid" id="liquid"></div>
-        <div class="face">😊</div>
-      </div>
-      <div class="progress-info">
-        <div class="amount" id="total">Saldo: 0</div>
-        <div class="goal">Target: 100</div>
-      </div>
-    </section>
 
-    <section class="form-section">
-      <form id="emotionForm">
-        <label for="emotion">Emosi</label>
-        <select id="emotion">
-          <option>Bahagia</option>
-          <option>Tenang</option>
-          <option>Biasa</option>
-          <option>Capek</option>
-          <option>Stress</option>
-        </select>
+<form id="emotionForm">
+<select id="mood">
+<option value="1.2">😁 Senang</option>
+<option value="1.0">🙂 Tenang</option>
+<option value="0.9">😐 Biasa Saja</option>
+<option value="0.8">😔 Capek</option>
+<option value="0.7">😩 Stress</option>
+</select>
 
-        <label for="value">Nilai (1–25)</label>
-        <input id="value" type="number" min="1" max="25" value="5" />
 
-        <button type="submit" class="btn">Masukkan ke Tabungan</button>
-      </form>
+<input type="number" id="income" placeholder="Pendapatan Bulanan" required />
+<input type="number" id="expense" placeholder="Pengeluaran Bulanan" required />
+<input type="number" id="target" placeholder="Target Tabungan" required />
 
-      <ul id="entries" class="entries">
-        <!-- daftar entri muncul di sini -->
-      </ul>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <small>Tip: Catat hal kecil yang membuatmu lega. Ulangi — itu menabung emosi.</small>
-  </footer>
+<button type="submit">Hitung</button>
+</form>
 
-  <script>
-    const form = document.getElementById('emotionForm');
-    const entries = document.getElementById('entries');
-    const totalEl = document.getElementById('total');
-    const liquid = document.getElementById('liquid');
 
-    let total = 0;
-    const GOAL = 100;
+<div id="result" class="result-box"></div>
+</div>
 
-    function updateUI() {
-      totalEl.textContent = `Saldo: ${total}`;
-      const pct = Math.min(100, Math.round((total / GOAL) * 100));
-      liquid.style.height = pct + '%';
-    }
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const emotion = document.getElementById('emotion').value;
-      const value = parseInt(document.getElementById('value').value, 10) || 0;
-      if (value <= 0) return;
-
-      total += value;
-
-      const li = document.createElement('li');
-      li.className = 'entry';
-      li.innerHTML = `<strong>${emotion}</strong> — +${value}`;
-      entries.prepend(li);
-
-      updateUI();
-      form.reset();
-      document.getElementById('value').value = 5;
-    });
-
-    // small playful animation: floating face
-    setInterval(() => {
-      const face = document.querySelector('.jar .face');
-      face.style.transform = `translateY(${Math.sin(Date.now()/600)*6}px)`;
-    }, 50);
-
-    // initialize
-    updateUI();
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
-
-
