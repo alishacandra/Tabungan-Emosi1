@@ -1,54 +1,48 @@
-:root {
+const form = document.getElementById("emotionForm");
+const resultBox = document.getElementById("result");
 
 
-form {
-display: flex;
-flex-direction: column;
-gap: 12px;
-}
+form.addEventListener("submit", function(e) {
+e.preventDefault();
 
 
-input, select {
-padding: 12px;
-border-radius: 10px;
-border: 1px solid var(--border);
-background: var(--accent-soft);
-outline: none;
-transition: 0.2s;
-}
+const mood = parseFloat(document.getElementById("mood").value);
+const income = parseFloat(document.getElementById("income").value);
+const expense = parseFloat(document.getElementById("expense").value);
+const target = parseFloat(document.getElementById("target").value);
 
 
-input:focus, select:focus {
-border-color: var(--accent);
-background: #fff;
-}
+const leftover = income - expense;
+const effectiveSave = leftover * mood;
 
 
-button {
-padding: 12px;
-border-radius: 10px;
-border: none;
-background: var(--accent);
-color: white;
-cursor: pointer;
-font-weight: 600;
-transition: 0.2s;
-}
+const months = Math.ceil(target / effectiveSave);
 
 
-button:hover {
-filter: brightness(0.9);
-}
+let moodText = "";
+if (mood === 1.2) moodText = "😁 Senang";
+else if (mood === 1.0) moodText = "🙂 Tenang";
+else if (mood === 0.9) moodText = "😐 Biasa Saja";
+else if (mood === 0.8) moodText = "😔 Capek";
+else if (mood === 0.7) moodText = "😩 Stress";
 
 
-.result-box {
-margin-top: 22px;
-background: var(--accent-soft);
-padding: 15px;
-border-radius: 12px;
-border: 1px solid var(--border);
-font-size: 0.95rem;
-color: var(--text);
-line-height: 1.6;
-display: none;
+resultBox.style.display = "block";
+resultBox.innerHTML = `
+Mood kamu hari ini: <strong>${moodText}</strong><br>
+Sisa uang bulanan: <strong>Rp ${leftover.toLocaleString()}</strong><br>
+Tabungan efektif (dipengaruhi mood): <strong>Rp ${effectiveSave.toLocaleString()}</strong><br><br>
+Target Rp ${target.toLocaleString()} akan tercapai dalam sekitar:<br>
+<strong>${months} bulan</strong><br><br>
+<em>${generateMessage(mood)}</em>
+`;
+});
+
+
+function generateMessage(mood) {
+if (mood === 1.2) return "Semangat banget hari ini! Teruskan energi positifmu ✨";
+if (mood === 1.0) return "Hari yang tenang cocok buat konsisten menabung 💗";
+if (mood === 0.9) return "Pelan tapi pasti, kamu tetap maju 🍃";
+if (mood === 0.8) return "Istirahat sebentar tidak apa-apa, kamu tetap hebat 💞";
+if (mood === 0.7) return "Gak apa-apa stress, yang penting tetap pelan-pelan ya 💗";
 }
