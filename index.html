@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -7,11 +6,13 @@
   <title>Tabungan Emosi</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <div class="container">
     <h1 class="title">✨ Tabungan Emosi ✨</h1>
     <p class="subtitle">Hitung perjalanan tabunganmu berdasarkan mood hari ini 💖</p>
 
+    <!-- FORM -->
     <form id="emotionForm" class="card">
       <label>Mood Kamu Hari Ini</label>
       <select id="mood" class="input mood-select">
@@ -34,12 +35,36 @@
       <button type="submit" class="btn">Hitung Sekarang</button>
     </form>
 
-    <div id="result" class="result-box hidden"></div>
-    <p class="motivasi">"Setiap langkah kecil tetap mendekatkanmu pada tujuan. Mood boleh naik turun, tapi kamu tetap hebat karena terus berusaha. 💕"</p>
-</div>
+    <!-- HASIL -->
+    <div id="result" class="result-box"></div>
 
-<script src="script.js"></script>
+    <p class="motivasi">
+      "Setiap langkah kecil tetap mendekatkanmu pada tujuan. Mood boleh naik turun,
+      tapi kamu tetap hebat karena terus berusaha. 💕"
+    </p>
+
+    <!-- PROGRESS SECTION -->
+    <section class="progress-wrap" aria-live="polite">
+      <h2 class="progress-heading">Progress Pencapaian Target</h2>
+
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="progressFill"></div>
+        <div class="progress-percent" id="progressPct">0%</div>
+      </div>
+
+      <div class="progress-info">
+        <div>Sudah terkumpul: <strong id="cumulative">Rp 0</strong></div>
+        <div>Target: <strong id="targetDisplay">Rp 0</strong></div>
+      </div>
+
+      <h3 class="month-heading">Progress Bulanan (12 bulan)</h3>
+      <div id="monthChecks" class="month-checks">
+        <!-- JS akan membuat 12 kotak otomatis -->
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
-
