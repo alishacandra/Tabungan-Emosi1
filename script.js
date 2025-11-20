@@ -84,37 +84,25 @@ document.getElementById("emotionForm").addEventListener("submit", function(e) {
 });
 
 // =============================
-// TOMBOL "✔ SUDAH MENABUNG HARI INI"
+// TOMBOL "✔ SUDAH MENABUNG HARI INI" + ANIMASI
 // =============================
 document.getElementById("markToday").addEventListener("click", function () {
-  const today = new Date().getDate(); // contoh: hari ke-16 dalam bulan
+  const today = new Date().getDate();
   const index = today - 1;
 
   dayChecks[index] = true;
   localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
 
   renderDayBoxes();
-});// =========================
-// TANDAI HARI INI (DENGAN ANIMASI POP)
-// =========================
-document.getElementById("markToday").addEventListener("click", () => {
-    const today = new Date().getDate() - 1; // 0–29
 
-    if (today < 0 || today >= 30) return;
+  // Tambahkan animasi centang pada box hari ini
+  const boxes = document.querySelectorAll(".day-box");
+  const todayBox = boxes[index];
 
-    if (!dayChecks[today]) {
-        dayChecks[today] = true;
-        localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
-    }
+  todayBox.classList.add("pop-check");
 
-    const box = document.querySelectorAll(".day-box")[today];
-    box.classList.add("checked");
-
-    // tambah animasi biar selalu pop kalau ditekan
-    box.style.animation = "none";
-    void box.offsetWidth; // trik restart animasi
-    box.style.animation = "popCheck 0.28s ease-out";
-
-    updateProgress();
+  // hapus animasi agar bisa dimainkan lagi besok
+  setTimeout(() => {
+    todayBox.classList.remove("pop-check");
+  }, 600);
 });
-
