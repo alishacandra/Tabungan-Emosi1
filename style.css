@@ -1,4 +1,4 @@
-/* Google Fonts */
+/* 🌸 Girly Aesthetic CSS – Full Version */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap');
 
 body {
@@ -14,36 +14,46 @@ body {
 
 .container {
     width: 90%;
-    max-width: 450px;
-    background: #ffffffcc;
+    max-width: 480px;
+    background: #ffffffd6;
     backdrop-filter: blur(6px);
-    padding: 25px;
-    border-radius: 25px;
-    margin-top: 35px;
-    box-shadow: 0 10px 30px rgba(255, 160, 200, 0.3);
+    padding: 28px;
+    border-radius: 28px;
+    margin-top: 40px;
+    box-shadow: 0 10px 35px rgba(255, 150, 190, 0.35);
     animation: fadeIn 0.8s ease;
 }
 
-/* Cute title */
-h1 {
+h1.title {
     text-align: center;
     font-family: "Pacifico", cursive;
     color: #ff74b8;
-    font-size: 2.1rem;
-    margin-bottom: 15px;
+    font-size: 2.3rem;
+    margin-bottom: 6px;
 }
 
-/* Target info box */
-.target-box {
-    background: #ffe9f4;
-    border: 2px solid #ffb5d4;
-    padding: 12px;
-    border-radius: 18px;
+.subtitle {
+    text-align: center;
+    color: #ff94cd;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+.card {
+    background: #fff4fb;
+    padding: 18px;
+    border-radius: 20px;
+    border: 2px solid #ffc8e1;
     margin-bottom: 20px;
 }
 
-/* Input */
-input {
+label {
+    font-weight: 500;
+    color: #ff5fa3;
+    font-size: 0.9rem;
+}
+
+.input {
     width: 100%;
     padding: 12px;
     font-size: 15px;
@@ -51,16 +61,21 @@ input {
     border-radius: 15px;
     outline: none;
     background: #fff7fc;
+    margin-top: 5px;
+    margin-bottom: 12px;
     transition: 0.2s ease;
 }
 
-input:focus {
+.input:focus {
     border-color: #ff77c2;
     box-shadow: 0 0 8px #ffbfe5;
 }
 
-/* Button */
-button {
+.mood-select {
+    cursor: pointer;
+}
+
+.btn {
     width: 100%;
     margin-top: 12px;
     padding: 12px;
@@ -71,78 +86,34 @@ button {
     font-weight: 600;
     color: white;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(255, 110, 170, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 110, 170, 0.4);
     transition: 0.2s ease;
 }
 
-button:hover {
+.btn:hover {
     background: #ff6db3;
-    box-shadow: 0 5px 14px rgba(255, 110, 170, 0.5);
+    box-shadow: 0 5px 15px rgba(255, 110, 170, 0.5);
 }
 
-/* Progress Bar */
-.progress-container {
-    background: #ffe4f2;
-    border-radius: 25px;
-    width: 100%;
-    height: 20px;
-    margin-top: 15px;
-    overflow: hidden;
+.result-box {
+    background: #ffeaf5;
     border: 2px solid #ffb5d4;
+    padding: 15px;
+    border-radius: 20px;
+    margin: 15px 0;
+    font-size: 0.95rem;
+    color: #ff3e88;
 }
+.hidden { display: none; }
 
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #ff6db9, #ffa7d7);
-    border-radius: 25px;
-    transition: width 0.5s ease;
-}
-
-/* Daily tracker grid */
-#dailyTracker {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-}
-
-.day-box {
-    background: #fff5fb;
-    border: 2px solid #ffc2dd;
-    padding: 10px;
+.motivasi {
     text-align: center;
-    border-radius: 15px;
-    font-size: 12px;
-    color: #ff5fa3;
-    position: relative;
-    transition: 0.2s;
+    font-size: 0.9rem;
+    color: #ff73b5;
+    margin: 15px 0;
+    font-style: italic;
 }
 
-.day-box.checked {
-    background: #ffb7d9;
-    border-color: #ff88c6;
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(255, 110, 170, 0.4);
-}
-
-/* Checkmark */
-.day-box.checked::after {
-    content: "✓";
-    font-size: 20px;
-    position: absolute;
-    top: -6px;
-    right: 5px;
-    color: white;
-    font-weight: 700;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-
+/* 🌸 Progress Bar */
+.progress-wrap {
+    margin-top:
