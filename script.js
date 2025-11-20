@@ -18,6 +18,24 @@ const effectiveSave = leftover * mood;
 
 const months = Math.ceil(target / effectiveSave);
 
+  // motivasi berdasarkan mood
+function getMotivation(mood) {
+  switch (mood) {
+    case "1.2":
+      return "Hari cerah dalam hatimu — teruslah menari bersama harapan. 🌼✨";
+    case "1.0":
+      return "Tenanglah, dunia berpihak pada jiwa yang damai. 🌙🌿";
+    case "0.9":
+      return "Tak tinggi, tak rendah — tetaplah melangkah. Biasa saja pun tetap berharga. ☁️💛";
+    case "0.8":
+      return "Capek itu wajar, tapi hatimu kuat. Istirahatlah, lalu bangkit lagi. 🌤️💪";
+    case "0.7":
+      return "Meski hari ini berat, kamu masih di sini — itu sudah luar biasa. Terus bertahan, cahaya akan datang. 🌒✨";
+    default:
+      return "Kamu hebat hanya dengan tetap berusaha. 💖";
+  }
+}
+
 
 let moodText = "";
 if (mood === 1.2) moodText = "😁 Senang";
