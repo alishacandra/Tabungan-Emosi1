@@ -1,4 +1,4 @@
-/* 🌸 Girly Aesthetic CSS – Full Version */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap');
 
 body {
@@ -112,6 +112,43 @@ label {
     color: #ff73b5;
     margin: 15px 0;
     font-style: italic;
+}
+/* ANIMASI POP SAAT DICENTANG */
+@keyframes popCheck {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+.day-box.checked {
+    background: #ffb7d9;
+    border-color: #ff88c6;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 120, 170, 0.4);
+
+    /* animasi pop */
+    animation: popCheck 0.28s ease-out;
+}
+
+/* Checkmark muncul dengan lembut */
+.day-box.checked::after {
+    content: "✓";
+    font-size: 20px;
+    position: absolute;
+    top: -6px;
+    right: 5px;
+    color: white;
+    font-weight: 700;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: fadeMark 0.35s ease forwards;
+}
+
+/* Animasi kemunculan checkmark */
+@keyframes fadeMark {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* 🌸 Progress Bar */
