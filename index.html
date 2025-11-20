@@ -1,17 +1,20 @@
-<!-- Enhanced index.html with progress bar & check marks -->
+
+<!-- index.html - Tabungan Emosi Versi Harian -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tabungan Emosi</title>
+  <title>Tabungan Emosi - Harian</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1 class="title">✨ Tabungan Emosi ✨</h1>
-    <p class="subtitle">Hitung perjalanan tabunganmu berdasarkan mood hari ini 💖</p>
 
+    <h1 class="title">✨ Tabungan Emosi ✨</h1>
+    <p class="subtitle">Hitung perjalanan tabunganmu berdasarkan mood harian 💖</p>
+
+    <!-- Form Perhitungan Harian -->
     <form id="emotionForm" class="card">
       <label>Mood Kamu Hari Ini</label>
       <select id="mood" class="input mood-select">
@@ -22,28 +25,28 @@
         <option value="0.7">😩 Stress (×0.7)</option>
       </select>
 
-      <label>Pendapatan Bulanan</label>
+      <label>Pendapatan Harian</label>
       <input type="number" id="income" class="input" placeholder="Rp ..." required />
 
-      <label>Pengeluaran Bulanan</label>
+      <label>Pengeluaran Harian</label>
       <input type="number" id="expense" class="input" placeholder="Rp ..." required />
 
-      <label>Target Tabungan</label>
+      <label>Target Tabungan Bulan Ini</label>
       <input type="number" id="target" class="input" placeholder="Rp ..." required />
 
-      <button type="submit" class="btn">Hitung Sekarang</button>
+      <button type="submit" class="btn">Hitung Hari Ini</button>
     </form>
 
-    <div id="result" class="result-box"></div>
+    <!-- Hasil Harian -->
+    <div id="result" class="result-box hidden"></div>
 
     <p class="motivasi" id="motivasiText">
-      "Setiap langkah kecil tetap mendekatkanmu pada tujuan. Mood boleh naik turun,
-      tapi kamu tetap hebat karena terus berusaha. 💕"
+      "Setiap hari adalah kesempatan baru. Kamu sudah hebat karena terus mencoba. 💕"
     </p>
 
-    <!-- Progress Section -->
+    <!-- PROGRESS BAR TOTAL -->
     <section class="progress-wrap">
-      <h2 class="progress-heading">Progress Pencapaian Target</h2>
+      <h2 class="progress-heading">Progress Pencapaian Target Bulanan</h2>
 
       <div class="progress-bar-outer">
         <div class="progress-bar-inner" id="progressFill"></div>
@@ -54,10 +57,17 @@
         <div>Sudah terkumpul: <strong id="cumulative">Rp 0</strong></div>
         <div>Target: <strong id="targetDisplay">Rp 0</strong></div>
       </div>
+    </section>
 
-      <h3 class="month-heading">Progress Bulanan (12 Bulan)</h3>
-      <div id="monthChecks" class="month-checks">
-        <!-- JS akan generate otomatis 12 kotak -->
+    <!-- TRACKER HARIAN -->
+    <section class="daily-tracker">
+      <h3 class="month-heading">Tracker Menabung Harian (30 Hari)</h3>
+      <p class="tracker-note">Klik tombol di bawah jika kamu sudah menabung hari ini ✨</p>
+
+      <button class="btn-check" id="markToday">✔ Sudah Menabung Hari Ini</button>
+
+      <div id="dayChecks" class="day-checks">
+        <!-- JS akan generate kotak Hari 1 - 30 -->
       </div>
     </section>
 
@@ -66,144 +76,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Girly Aesthetic Saving Tracker</title>
-<style>
-    body {
-        font-family: "Poppins", sans-serif;
-        background: #ffeef6;
-        padding: 40px;
-        color: #ff4f9a;
-        text-align: center;
-    }
-
-    .container {
-        background: white;
-        width: 350px;
-        margin: auto;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 0 15px #ffbcd4;
-    }
-
-    h2 {
-        margin-bottom: 15px;
-    }
-
-    input {
-        padding: 10px;
-        width: 80%;
-        border-radius: 10px;
-        border: 2px solid #ff9ec9;
-        margin-bottom: 15px;
-    }
-
-    button {
-        background: #ff69b4;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-weight: bold;
-        box-shadow: 0 0 10px #ffbad7;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        background: #ff4f9a;
-    }
-
-    .progress-box {
-        background: #ffe3f2;
-        border-radius: 15px;
-        height: 25px;
-        margin-top: 20px;
-        overflow: hidden;
-        border: 2px solid #ff9ec9;
-    }
-
-    .progress {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, #ff4f9a, #ffb2d6);
-        transition: 0.4s;
-    }
-
-    .checkmark {
-        font-size: 22px;
-        margin-top: 10px;
-        display: none;
-    }
-</style>
-</head>
-<body>
-
-<div class="container">
-    <h2>🌸 Girly Savings Tracker 🌸</h2>
-
-    <input type="number" id="target" placeholder="Masukkan target (Rp)" />
-    <input type="number" id="inputTabung" placeholder="Masukkan jumlah nabung hari ini (Rp)" />
-
-    <br>
-    <button onclick="tambahTabungan()">Saya sudah menabung 💗</button>
-
-    <p id="status"></p>
-
-    <div class="checkmark" id="checkmark">✔ Hari ini sudah menabung!</div>
-
-    <div class="progress-box">
-        <div class="progress" id="progress"></div>
-    </div>
-
-    <p id="persen"></p>
-</div>
-
-<script>
-    let totalTabungan = localStorage.getItem("tabungan") ? parseInt(localStorage.getItem("tabungan")) : 0;
-    let targetTabungan = localStorage.getItem("target") ? parseInt(localStorage.getItem("target")) : 0;
-
-    const progressBar = document.getElementById("progress");
-    const persenText = document.getElementById("persen");
-    const checkmark = document.getElementById("checkmark");
-
-    function updateProgress() {
-        if (targetTabungan === 0) return;
-
-        let persen = (totalTabungan / targetTabungan) * 100;
-        if (persen > 100) persen = 100;
-
-        progressBar.style.width = persen + "%";
-        persenText.innerHTML = Math.floor(persen) + "% menuju target 💖";
-    }
-
-    function tambahTabungan() {
-        let targetInput = document.getElementById("target").value;
-        let tabungInput = document.getElementById("inputTabung").value;
-
-        if (targetInput) {
-            targetTabungan = parseInt(targetInput);
-            localStorage.setItem("target", targetTabungan);
-        }
-
-        if (!tabungInput) {
-            alert("Isi jumlah tabungan hari ini!");
-            return;
-        }
-
-        totalTabungan += parseInt(tabungInput);
-        localStorage.setItem("tabungan", totalTabungan);
-
-        checkmark.style.display = "block";   // muncul centang
-        updateProgress();
-    }
-
-    updateProgress();
-</script>
-
-</body>
-</html>
-
