@@ -115,3 +115,143 @@ form.addEventListener('submit', e => {
 // initial render
 buildMonthBoxes();
 updateProgressUI();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Girly Aesthetic Saving Tracker</title>
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #ffeef6;
+        padding: 40px;
+        color: #ff4f9a;
+        text-align: center;
+    }
+
+    .container {
+        background: white;
+        width: 350px;
+        margin: auto;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px #ffbcd4;
+    }
+
+    h2 {
+        margin-bottom: 15px;
+    }
+
+    input {
+        padding: 10px;
+        width: 80%;
+        border-radius: 10px;
+        border: 2px solid #ff9ec9;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background: #ff69b4;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ffbad7;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #ff4f9a;
+    }
+
+    .progress-box {
+        background: #ffe3f2;
+        border-radius: 15px;
+        height: 25px;
+        margin-top: 20px;
+        overflow: hidden;
+        border: 2px solid #ff9ec9;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ff4f9a, #ffb2d6);
+        transition: 0.4s;
+    }
+
+    .checkmark {
+        font-size: 22px;
+        margin-top: 10px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🌸 Girly Savings Tracker 🌸</h2>
+
+    <input type="number" id="target" placeholder="Masukkan target (Rp)" />
+    <input type="number" id="inputTabung" placeholder="Masukkan jumlah nabung hari ini (Rp)" />
+
+    <br>
+    <button onclick="tambahTabungan()">Saya sudah menabung 💗</button>
+
+    <p id="status"></p>
+
+    <div class="checkmark" id="checkmark">✔ Hari ini sudah menabung!</div>
+
+    <div class="progress-box">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <p id="persen"></p>
+</div>
+
+<script>
+    let totalTabungan = localStorage.getItem("tabungan") ? parseInt(localStorage.getItem("tabungan")) : 0;
+    let targetTabungan = localStorage.getItem("target") ? parseInt(localStorage.getItem("target")) : 0;
+
+    const progressBar = document.getElementById("progress");
+    const persenText = document.getElementById("persen");
+    const checkmark = document.getElementById("checkmark");
+
+    function updateProgress() {
+        if (targetTabungan === 0) return;
+
+        let persen = (totalTabungan / targetTabungan) * 100;
+        if (persen > 100) persen = 100;
+
+        progressBar.style.width = persen + "%";
+        persenText.innerHTML = Math.floor(persen) + "% menuju target 💖";
+    }
+
+    function tambahTabungan() {
+        let targetInput = document.getElementById("target").value;
+        let tabungInput = document.getElementById("inputTabung").value;
+
+        if (targetInput) {
+            targetTabungan = parseInt(targetInput);
+            localStorage.setItem("target", targetTabungan);
+        }
+
+        if (!tabungInput) {
+            alert("Isi jumlah tabungan hari ini!");
+            return;
+        }
+
+        totalTabungan += parseInt(tabungInput);
+        localStorage.setItem("tabungan", totalTabungan);
+
+        checkmark.style.display = "block";   // muncul centang
+        updateProgress();
+    }
+
+    updateProgress();
+</script>
+
+</body>
+</html>
