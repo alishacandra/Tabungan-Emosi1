@@ -5,6 +5,7 @@
   --accent-soft: #ffe3f1;
   --text: #4a3d45;
   --border: #f4d6e4;
+  --gradient: linear-gradient(135deg, #ffb6d9, #ff8cc2);
 }
 
 * {
@@ -19,49 +20,56 @@ body {
   display: flex;
   justify-content: center;
   padding: 40px;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 .container {
   width: 100%;
   max-width: 420px;
   background: var(--card);
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
   border: 1px solid var(--border);
+  animation: floatUp 0.6s ease-out;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
   color: var(--text);
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 input, select {
-  padding: 12px;
-  border-radius: 10px;
+  padding: 13px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--accent-soft);
   outline: none;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 input:focus, select:focus {
   border-color: var(--accent);
   background: #fff;
+  box-shadow: 0 0 8px rgba(255,140,194,0.4);
 }
 
 button {
-  padding: 12px;
-  border-radius: 10px;
+  padding: 13px;
+  border-radius: 12px;
   border: none;
-  background: var(--accent);
+  background: var(--gradient);
   color: white;
   cursor: pointer;
   font-weight: 600;
@@ -69,17 +77,102 @@ button {
 }
 
 button:hover {
-  filter: brightness(0.9);
+  transform: scale(1.03);
+  opacity: 0.95;
 }
 
 .result-box {
-  margin-top: 22px;
+  margin-top: 25px;
   background: var(--accent-soft);
-  padding: 15px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 14px;
   border: 1px solid var(--border);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--text);
   line-height: 1.6;
   display: none;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Aesthetic Enhancements Added --- */
+
+/* Soft glow around the container */
+.container {
+  position: relative;
+  box-shadow: 0 0 25px rgba(255, 170, 200, 0.25),
+              0 0 50px rgba(255, 170, 200, 0.15);
+  animation: fadeIn 1s ease;  
+}
+
+/* Subtle floating animation */
+.container:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease;
+}
+
+/* Glow when focusing input */
+input:focus, select:focus {
+  box-shadow: 0 0 8px rgba(255, 150, 200, 0.4);
+}
+
+button {
+  box-shadow: 0 4px 12px rgba(255, 140, 180, 0.3);
+}
+
+button:hover {
+  box-shadow: 0 6px 18px rgba(255, 140, 180, 0.45);
+}
+
+/* Result box fade-in */
+.result-box {
+  animation: fadeInUp 0.8s ease;
+}
+
+/* Background gradient glow */
+body::before {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffc7dd50, #ff9ac700);
+  top: -100px;
+  left: -80px;
+  z-index: -1;
+  filter: blur(80px);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd7e850, #ff9ac700);
+  bottom: -120px;
+  right: -60px;
+  z-index: -1;
+  filter: blur(90px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
