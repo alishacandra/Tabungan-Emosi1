@@ -52,7 +52,7 @@ Sisa uang bulanan: <strong>Rp ${leftover.toLocaleString()}</strong><br>
 Tabungan efektif (dipengaruhi mood): <strong>Rp ${effectiveSave.toLocaleString()}</strong><br><br>
 Target Rp ${target.toLocaleString()} akan tercapai dalam sekitar:<br>
 <strong>${months} bulan</strong><br><br>
-<em>${generateMessage(mood)}</em>
+<em>${getMotivation(mood)}</em>
 `;
 });
 
