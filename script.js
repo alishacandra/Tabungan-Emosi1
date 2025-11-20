@@ -94,4 +94,27 @@ document.getElementById("markToday").addEventListener("click", function () {
   localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
 
   renderDayBoxes();
+});// =========================
+// TANDAI HARI INI (DENGAN ANIMASI POP)
+// =========================
+document.getElementById("markToday").addEventListener("click", () => {
+    const today = new Date().getDate() - 1; // 0–29
+
+    if (today < 0 || today >= 30) return;
+
+    if (!dayChecks[today]) {
+        dayChecks[today] = true;
+        localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
+    }
+
+    const box = document.querySelectorAll(".day-box")[today];
+    box.classList.add("checked");
+
+    // tambah animasi biar selalu pop kalau ditekan
+    box.style.animation = "none";
+    void box.offsetWidth; // trik restart animasi
+    box.style.animation = "popCheck 0.28s ease-out";
+
+    updateProgress();
 });
+
