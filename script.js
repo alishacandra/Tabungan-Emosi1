@@ -1,18 +1,18 @@
 // =============================
-// LOAD DATA DARI LOCAL STORAGE
+//       LOAD DATA LOCALSTORAGE
 // =============================
 let cumulative = Number(localStorage.getItem("cumulative")) || 0;
 let targetValue = Number(localStorage.getItem("targetValue")) || 0;
 let dayChecks = JSON.parse(localStorage.getItem("dayChecks")) || Array(30).fill(false);
 
+// Update tampilan awal
 document.getElementById("cumulative").innerText = formatRupiah(cumulative);
 document.getElementById("targetDisplay").innerText = formatRupiah(targetValue);
 
 // =============================
-// GENERATE TRACKER HARI 1─30
+//       GENERATE TRACKER 1-30
 // =============================
 const dayContainer = document.getElementById("dayChecks");
-dayContainer.innerHTML = "";
 
 function renderDayBoxes() {
   dayContainer.innerHTML = "";
@@ -29,18 +29,17 @@ function renderDayBoxes() {
 renderDayBoxes();
 
 // =============================
-// FORMAT RUPIAH
+//         FORMAT RUPIAH
 // =============================
 function formatRupiah(num) {
   return "Rp " + num.toLocaleString("id-ID");
 }
 
 // =============================
-// UPDATE PROGRESS BAR
+//      UPDATE PROGRESS BAR
 // =============================
 function updateProgress() {
   const pct = targetValue ? Math.min((cumulative / targetValue) * 100, 100) : 0;
-  
   document.getElementById("progressFill").style.width = pct + "%";
   document.getElementById("progressPct").innerText = Math.floor(pct) + "%";
 
@@ -53,9 +52,9 @@ function updateProgress() {
 updateProgress();
 
 // =============================
-// HITUNG TABUNGAN HARI INI
+//   FORM SUBMIT - HITUNG HARI INI
 // =============================
-document.getElementById("emotionForm").addEventListener("submit", function(e) {
+document.getElementById("emotionForm").addEventListener("submit", function(e){
   e.preventDefault();
 
   const mood = Number(document.getElementById("mood").value);
@@ -84,25 +83,20 @@ document.getElementById("emotionForm").addEventListener("submit", function(e) {
 });
 
 // =============================
-// TOMBOL "✔ SUDAH MENABUNG HARI INI" + ANIMASI
+//   TOMBOL "SUDAH MENABUNG HARI INI"
 // =============================
-document.getElementById("markToday").addEventListener("click", function () {
-  const today = new Date().getDate();
+document.getElementById("markToday").addEventListener("click", function(){
+  const today = new Date().getDate(); // misal hari ini tanggal ke-16
   const index = today - 1;
 
-  dayChecks[index] = true;
-  localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
+  if(!dayChecks[index]) {
+    dayChecks[index] = true;
+    localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
 
-  renderDayBoxes();
-
-  // Tambahkan animasi centang pada box hari ini
-  const boxes = document.querySelectorAll(".day-box");
-  const todayBox = boxes[index];
-
-  todayBox.classList.add("pop-check");
-
-  // hapus animasi agar bisa dimainkan lagi besok
-  setTimeout(() => {
-    todayBox.classList.remove("pop-check");
-  }, 600);
+    const box = dayContainer.children[index];
+    box.classList.add("checked");
+    // Tambah animasi centang
+    box.style.transform = "scale(0.8)";
+    setTimeout(()=>{ box.style.transform = "scale(1)"; }, 150);
+  }
 });
