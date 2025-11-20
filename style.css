@@ -1,123 +1,148 @@
-:root{
-  --bg: #fff6fb;
-  --card: #ffffff;
-  --pink-1: #ff9ac7;
-  --pink-2: #ffd6ea;
-  --muted: #6b5160;
-  --glass: rgba(255,255,255,0.7);
-  --shadow: 0 10px 30px rgba(179,113,142,0.12);
-  --accent-gradient: linear-gradient(90deg, #ff9ac7, #ff73b3);
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffe6f2, #f7e9ff, #fff1f7);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-*{box-sizing:border-box}
-body{
-  font-family: 'Poppins',system-ui,Arial;
-  background: linear-gradient(180deg,#fff6fb 0%, #fff0f8 100%);
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding:40px 16px;
-  color:var(--muted);
-  -webkit-font-smoothing:antialiased;
+.container {
+    width: 90%;
+    max-width: 450px;
+    background: #ffffffcc;
+    backdrop-filter: blur(6px);
+    padding: 25px;
+    border-radius: 25px;
+    margin-top: 35px;
+    box-shadow: 0 10px 30px rgba(255, 160, 200, 0.3);
+    animation: fadeIn 0.8s ease;
 }
 
-.container{
-  width:100%;
-  max-width:520px;
-  background:var(--card);
-  border-radius:20px;
-  padding:28px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(255,150,180,0.08);
+/* Cute title */
+h1 {
+    text-align: center;
+    font-family: "Pacifico", cursive;
+    color: #ff74b8;
+    font-size: 2.1rem;
+    margin-bottom: 15px;
 }
 
-/* header */
-.title{
-  font-weight:800;
-  letter-spacing:0.2px;
-  font-size:22px;
-  color: #8b3b63;
-  margin:0 0 6px 0;
-  background: linear-gradient(90deg,#ff6fae,#ff9ac7);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.subtitle{margin:0 0 18px 0; color:#87636f; font-size:13px}
-
-/* form */
-.card{background:linear-gradient(180deg, #fff, #fffafc); padding:16px; border-radius:14px; border:1px solid rgba(255,150,180,0.06)}
-.card label{font-size:13px; margin-bottom:6px; display:block; color:#7a5867}
-.input{width:100%; padding:12px; border-radius:10px; border:1px solid rgba(200,170,185,0.35); background:var(--pink-2); font-size:15px}
-.input:focus{outline:none; box-shadow:0 6px 18px rgba(255,150,180,0.14); background:#fff}
-
-/* button */
-.btn{margin-top:6px; width:100%; padding:12px; border-radius:12px; border:none; cursor:pointer;
-  background:var(--accent-gradient); color:white; font-weight:700; font-size:15px; box-shadow:0 8px 20px rgba(255,110,160,0.12)}
-.btn:hover{transform:translateY(-3px); transition:0.18s}
-
-/* result */
-.result-box{margin-top:20px; padding:14px; border-radius:12px; background:var(--pink-2); border:1px solid rgba(255,150,180,0.05); display:none; color:#6b3f52}
-
-/* progress section */
-.progress-wrap{margin-top:18px}
-.progress-heading{font-size:15px; margin:6px 0 8px 0; color:#7a4860}
-.progress-bar-outer{
-  position:relative;
-  height:44px;
-  background: linear-gradient(90deg, #fff, #fff8fb);
-  border-radius:12px;
-  border:1px solid rgba(200,170,185,0.15);
-  overflow:hidden;
-}
-.progress-bar-inner{
-  height:100%;
-  width:0%;
-  background: linear-gradient(90deg, rgba(255,122,170,0.95), rgba(255,156,190,0.95));
-  box-shadow: inset 0 -6px 18px rgba(255,120,170,0.12);
-  transition: width 700ms cubic-bezier(.2,.9,.2,1);
-}
-.progress-percent{
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-  font-weight:700;
-  color:#fff;
-  text-shadow:0 2px 6px rgba(139,59,88,0.25);
-  font-size:13px;
+/* Target info box */
+.target-box {
+    background: #ffe9f4;
+    border: 2px solid #ffb5d4;
+    padding: 12px;
+    border-radius: 18px;
+    margin-bottom: 20px;
 }
 
-/* progress info */
-.progress-info{display:flex; justify-content:space-between; margin-top:8px; font-size:13px; color:#75515f}
+/* Input */
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 2px solid #ffbddd;
+    border-radius: 15px;
+    outline: none;
+    background: #fff7fc;
+    transition: 0.2s ease;
+}
 
-/* month checks (12 kotak bulan) */
-.month-heading{margin-top:14px; font-size:14px; color:#7a4860}
-.month-checks{
-  margin-top:10px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+input:focus {
+    border-color: #ff77c2;
+    box-shadow: 0 0 8px #ffbfe5;
 }
-.month-box{
-  width:60px; height:52px; border-radius:10px;
-  background:linear-gradient(180deg,#fff,#fff6f9);
-  border:1px solid rgba(200,170,185,0.12);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  font-weight:600; color:#9b5a74; position:relative;
-  box-shadow:0 6px 14px rgba(180,120,140,0.06);
-}
-.month-box .label{font-size:12px; color:#8a596f}
-.month-box .tick{
-  position:absolute; top:6px; right:8px; font-size:14px; color:#fff; background:linear-gradient(90deg,#ff7aa5,#ff5a8c); width:22px;height:22px;border-radius:50%; display:none; align-items:center; justify-content:center;
-  box-shadow:0 4px 10px rgba(255,110,160,0.12);
-}
-.month-box.checked{background:linear-gradient(90deg,#ff9ac7,#ff6fae); color:white}
-.month-box.checked .tick{display:flex}
 
-/* responsive */
-@media (max-width:420px){
-  .month-box{width:48px; height:46px; font-size:13px}
-  .progress-bar-outer{height:36px}
+/* Button */
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    background: #ff91ca;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 110, 170, 0.4);
+    transition: 0.2s ease;
 }
+
+button:hover {
+    background: #ff6db3;
+    box-shadow: 0 5px 14px rgba(255, 110, 170, 0.5);
+}
+
+/* Progress Bar */
+.progress-container {
+    background: #ffe4f2;
+    border-radius: 25px;
+    width: 100%;
+    height: 20px;
+    margin-top: 15px;
+    overflow: hidden;
+    border: 2px solid #ffb5d4;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff6db9, #ffa7d7);
+    border-radius: 25px;
+    transition: width 0.5s ease;
+}
+
+/* Daily tracker grid */
+#dailyTracker {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day-box {
+    background: #fff5fb;
+    border: 2px solid #ffc2dd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #ff5fa3;
+    position: relative;
+    transition: 0.2s;
+}
+
+.day-box.checked {
+    background: #ffb7d9;
+    border-color: #ff88c6;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(255, 110, 170, 0.4);
+}
+
+/* Checkmark */
+.day-box.checked::after {
+    content: "✓";
+    font-size: 20px;
+    position: absolute;
+    top: -6px;
+    right: 5px;
+    color: white;
+    font-weight: 700;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 
