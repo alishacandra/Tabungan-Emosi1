@@ -1,102 +1,209 @@
-// =============================
-//       LOAD DATA LOCALSTORAGE
-// =============================
-let cumulative = Number(localStorage.getItem("cumulative")) || 0;
-let targetValue = Number(localStorage.getItem("targetValue")) || 0;
-let dayChecks = JSON.parse(localStorage.getItem("dayChecks")) || Array(30).fill(false);
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap');
 
-// Update tampilan awal
-document.getElementById("cumulative").innerText = formatRupiah(cumulative);
-document.getElementById("targetDisplay").innerText = formatRupiah(targetValue);
-
-// =============================
-//       GENERATE TRACKER 1-30
-// =============================
-const dayContainer = document.getElementById("dayChecks");
-
-function renderDayBoxes() {
-  dayContainer.innerHTML = "";
-  for (let i = 0; i < 30; i++) {
-    const box = document.createElement("div");
-    box.className = "day-box";
-    box.innerText = i + 1;
-
-    if (dayChecks[i]) box.classList.add("checked");
-
-    dayContainer.appendChild(box);
-  }
-}
-renderDayBoxes();
-
-// =============================
-//         FORMAT RUPIAH
-// =============================
-function formatRupiah(num) {
-  return "Rp " + num.toLocaleString("id-ID");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-// =============================
-//      UPDATE PROGRESS BAR
-// =============================
-function updateProgress() {
-  const pct = targetValue ? Math.min((cumulative / targetValue) * 100, 100) : 0;
-  document.getElementById("progressFill").style.width = pct + "%";
-  document.getElementById("progressPct").innerText = Math.floor(pct) + "%";
-
-  document.getElementById("cumulative").innerText = formatRupiah(cumulative);
-  document.getElementById("targetDisplay").innerText = formatRupiah(targetValue);
-
-  localStorage.setItem("cumulative", cumulative);
-  localStorage.setItem("targetValue", targetValue);
+/* BODY & CONTAINER */
+body {
+  background: linear-gradient(135deg, #ffe6f2, #fce9ff, #fff1f7);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
 }
-updateProgress();
 
-// =============================
-//   FORM SUBMIT - HITUNG HARI INI
-// =============================
-document.getElementById("emotionForm").addEventListener("submit", function(e){
-  e.preventDefault();
+.container {
+  width: 90%;
+  max-width: 450px;
+  background: #ffffffcc;
+  backdrop-filter: blur(6px);
+  padding: 30px 25px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(255, 150, 200, 0.25);
+  animation: fadeIn 0.8s ease;
+}
 
-  const mood = Number(document.getElementById("mood").value);
-  const income = Number(document.getElementById("income").value);
-  const expense = Number(document.getElementById("expense").value);
-  const target = Number(document.getElementById("target").value);
+/* TITLE */
+h1.title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2rem;
+  text-align: center;
+  color: #ff6fb1;
+  margin-bottom: 10px;
+}
 
-  targetValue = target;
-  localStorage.setItem("targetValue", targetValue);
+p.subtitle {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #4a3d45;
+}
 
-  let resultBox = document.getElementById("result");
+/* FORM INPUTS */
+form.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #fff0f7;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #ffc2e1;
+}
 
-  let dailySaving = (income - expense) * mood;
-  if (dailySaving < 0) dailySaving = 0;
+.input {
+  padding: 12px;
+  border-radius: 15px;
+  border: 2px solid #ffb6d9;
+  outline: none;
+  transition: 0.25s ease;
+  background: #fff5fb;
+}
 
-  cumulative += dailySaving;
-  localStorage.setItem("cumulative", cumulative);
+.input:focus {
+  border-color: #ff6fb1;
+  box-shadow: 0 0 8px #ffbfe5;
+}
 
-  updateProgress();
+/* BUTTON */
+button.btn {
+  padding: 12px;
+  border-radius: 15px;
+  border: none;
+  background: linear-gradient(90deg, #ff6fb1, #ffa7d7);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-  resultBox.classList.remove("hidden");
-  resultBox.innerHTML = `
-    <p><strong>Tabungan hari ini:</strong> ${formatRupiah(dailySaving)}</p>
-    <p><strong>Total tabungan sekarang:</strong> ${formatRupiah(cumulative)}</p>
-  `;
-});
+button.btn:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
 
-// =============================
-//   TOMBOL "SUDAH MENABUNG HARI INI"
-// =============================
-document.getElementById("markToday").addEventListener("click", function(){
-  const today = new Date().getDate(); // misal hari ini tanggal ke-16
-  const index = today - 1;
+/* RESULT BOX */
+.result-box {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 15px;
+  border: 2px solid #ffb6d9;
+  background: #ffe4f2;
+  color: #4a3d45;
+  line-height: 1.6;
+  display: none;
+  animation: fadeInUp 0.6s ease;
+}
 
-  if(!dayChecks[index]) {
-    dayChecks[index] = true;
-    localStorage.setItem("dayChecks", JSON.stringify(dayChecks));
+/* PROGRESS BAR */
+.progress-wrap {
+  margin-top: 25px;
+}
 
-    const box = dayContainer.children[index];
-    box.classList.add("checked");
-    // Tambah animasi centang
-    box.style.transform = "scale(0.8)";
-    setTimeout(()=>{ box.style.transform = "scale(1)"; }, 150);
-  }
-});
+.progress-bar-outer {
+  width: 100%;
+  height: 20px;
+  background: #ffe4f2;
+  border-radius: 25px;
+  border: 2px solid #ffb6d9;
+  overflow: hidden;
+  position: relative;
+  margin-top: 10px;
+}
+
+.progress-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff6fb1, #ffa7d7);
+  border-radius: 25px;
+  transition: width 0.5s ease;
+}
+
+.progress-percent {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4a3d45;
+}
+
+/* PROGRESS INFO */
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #4a3d45;
+}
+
+/* DAILY TRACKER */
+.daily-tracker {
+  margin-top: 25px;
+}
+
+.month-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ff6fb1;
+  margin-bottom: 8px;
+}
+
+.tracker-note {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #4a3d45;
+}
+
+#markToday {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.day-checks {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.day-box {
+  background: #fff0f7;
+  border: 2px solid #ffc2e1;
+  border-radius: 12px;
+  text-align: center;
+  padding: 8px 0;
+  color: #ff6fb1;
+  font-weight: 500;
+  font-size: 0.85rem;
+  position: relative;
+  transition: all 0.25s;
+}
+
+.day-box.checked {
+  background: #ff6fb1;
+  border-color: #ff4a91;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(255, 110, 170, 0.3);
+}
+
+.day-box.checked::after {
+  content: "✔";
+  font-size: 16px;
+  position: absolute;
+  top: -4px;
+  right: 4px;
+  color: white;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
