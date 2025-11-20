@@ -53,14 +53,14 @@ Tabungan efektif (dipengaruhi mood): <strong>Rp ${effectiveSave.toLocaleString()
 Target Rp ${target.toLocaleString()} akan tercapai dalam sekitar:<br>
 <strong>${months} bulan</strong><br><br>
 <em>${generateMessage(mood)}</em>
-`;
+`
 });
 
 
 function generateMessage(mood) {
-if (mood === 1.2) return "Semangat banget hari ini! Teruskan energi positifmu ✨";
-if (mood === 1.0) return "Hari yang tenang cocok buat konsisten menabung 💗";
-if (mood === 0.9) return "Pelan tapi pasti, kamu tetap maju 🍃";
-if (mood === 0.8) return "Istirahat sebentar tidak apa-apa, kamu tetap hebat 💞";
-if (mood === 0.7) return "Gak apa-apa stress, yang penting tetap pelan-pelan ya 💗";
+if (mood === 1.2) return "Hari cerah dalam hatimu — teruslah menari bersama harapan. 🌼✨";
+if (mood === 1.0) return "Tenanglah, dunia berpihak pada jiwa yang damai. 🌙🌿";
+if (mood === 0.9) return "Tak tinggi, tak rendah — tetaplah melangkah. Biasa saja pun tetap berharga. ☁️💛";
+if (mood === 0.8) return "Capek itu wajar, tapi hatimu kuat. Istirahatlah, lalu bangkit lagi. 🌤️💪";
+if (mood === 0.7) return "Meski hari ini berat, kamu masih di sini — itu sudah luar biasa. Terus bertahan, cahaya akan datang. 🌒✨";
 }
