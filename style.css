@@ -1,141 +1,146 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap');
+/* ===== FONT & RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffe6f2, #f7e9ff, #fff1f7);
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+  background: #ffe6f2;
+  padding: 20px;
+  color: #444;
 }
 
-.container {
-    width: 90%;
-    max-width: 480px;
-    background: #ffffffd6;
-    backdrop-filter: blur(6px);
-    padding: 28px;
-    border-radius: 28px;
-    margin-top: 40px;
-    box-shadow: 0 10px 35px rgba(255, 150, 190, 0.35);
-    animation: fadeIn 0.8s ease;
+/* ===== TITLE ===== */
+.app-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #ff4fa3;
 }
 
-h1.title {
-    text-align: center;
-    font-family: "Pacifico", cursive;
-    color: #ff74b8;
-    font-size: 2.3rem;
-    margin-bottom: 6px;
+.sub {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #666;
 }
 
-.subtitle {
-    text-align: center;
-    color: #ff94cd;
-    font-size: 0.95rem;
-    margin-bottom: 18px;
+/* ===== EMOTION BUTTONS ===== */
+.emotion-container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 25px;
 }
 
-.card {
-    background: #fff4fb;
-    padding: 18px;
-    border-radius: 20px;
-    border: 2px solid #ffc8e1;
-    margin-bottom: 20px;
+.emotion-btn {
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
 }
 
-label {
-    font-weight: 500;
-    color: #ff5fa3;
-    font-size: 0.9rem;
+.emotion-btn:hover {
+  transform: scale(1.05);
 }
 
-.input {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-    border: 2px solid #ffbddd;
-    border-radius: 15px;
-    outline: none;
-    background: #fff7fc;
-    margin-top: 5px;
-    margin-bottom: 12px;
-    transition: 0.2s ease;
+/* Warna Emotion */
+.happy { background: #FFD93D; color: #5d4e00; }
+.sad { background: #6ECFFF; }
+.angry { background: #FF6961; }
+.calm { background: #A1E3A1; }
+.grateful { background: #FFB6E6; }
+
+/* ===== WEEKLY PROGRESS ===== */
+h2 {
+  font-size: 20px;
+  margin: 20px 0 10px;
+  color: #ff4fa3;
 }
 
-.input:focus {
-    border-color: #ff77c2;
-    box-shadow: 0 0 8px #ffbfe5;
+#week-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.mood-select {
-    cursor: pointer;
+.day-box {
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  border-radius: 10px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  text-align: center;
+  transition: 0.3s;
 }
 
-.btn {
-    width: 100%;
-    margin-top: 12px;
-    padding: 12px;
-    background: #ff91ca;
-    border: none;
-    border-radius: 15px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255, 110, 170, 0.4);
-    transition: 0.2s ease;
+.day-box .check {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.btn:hover {
-    background: #ff6db3;
-    box-shadow: 0 5px 15px rgba(255, 110, 170, 0.5);
+.day-label {
+  color: #777;
 }
 
-.result-box {
-    background: #ffeaf5;
-    border: 2px solid #ffb5d4;
-    padding: 15px;
-    border-radius: 20px;
-    margin: 15px 0;
-    font-size: 0.95rem;
-    color: #ff3e88;
-}
-.hidden { display: none; }
-
-.motivasi {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #ff73b5;
-    margin: 15px 0;
-    font-style: italic;
-}
-/* Animasi centang (bounce) */
-.pop-check {
-  animation: pop 0.5s ease-out forwards;
+/* ===== STATISTIK ===== */
+#stats-box {
+  margin-top: 15px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 
-@keyframes pop {
-  0% {
-    transform: scale(1);
-    background-color: #a0f4a0;
-  }
-  50% {
-    transform: scale(1.25);
-    background-color: #6be96b;
-  }
-  100% {
-    transform: scale(1);
-    background-color: #4ade80; /* warna checked */
-  }
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
 }
 
-/* warna untuk hari yang sudah ditandai */
-.day-box.checked {
-  background-color: #4ade80;
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-weight: 600;
+}
+
+.stat-count {
+  font-weight: 700;
+  color: #ff49a0;
+}
+
+/* ===== BUTTON RESET ===== */
+.reset-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #ff4fa3;
   color: white;
-  border-color: #3ecf6f;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
+.reset-btn:hover {
+  background: #e23e8f;
+  transform: scale(1.03);
+}
+
+
